@@ -13,7 +13,7 @@ namespace pryBaseDatoSocio
     internal class clsAccesoDatos
     {
         OleDbConnection conexionBD;
-        OleDbCommand comandoBD;
+        OleDbCommand comandoBD; //Sirve para datos, editar y borrar 
         OleDbDataReader lectorBD;
 
         string cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;" +
@@ -52,7 +52,7 @@ namespace pryBaseDatoSocio
             {
                 while (lectorBD.Read())
                 {
-                    datosTabla += "-" + lectorBD[1];
+                    datosTabla += "-" + lectorBD[0]; //El 0 muestra la primer columna(Los ID)
                 }
             }
         }
