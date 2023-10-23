@@ -16,8 +16,8 @@ namespace pryBaseDatoSocio
         OleDbCommand comandoBD; //Sirve para datos, editar y borrar 
         OleDbDataReader lectorBD;
 
-        string cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;" +
-            "Data Source=EL_CLUB.accdb";
+        string cadenaConexion = @"Provider=Microsoft.ACE.OLEDB.12.0;" +
+            "Data Source = ..\\..\\Resources\\EL_CLUB.accdb";
 
         public string estadoConexion="";
         public string datosTabla;
@@ -76,8 +76,8 @@ namespace pryBaseDatoSocio
             {
                 while (lectorBD.Read())
                 {
-                    datosTabla += "-" + lectorBD[0], lectorBD[2], lectorBD[3]; //El 0 muestra la primer columna(Los ID)
-                    grilla.Rows.Add();
+                    datosTabla += "-" + lectorBD[0]; //El 0 muestra la primer columna(Los ID)
+                    grilla.Rows.Add(lectorBD[1], lectorBD[2], lectorBD[3]);
                 }
             }
         }
