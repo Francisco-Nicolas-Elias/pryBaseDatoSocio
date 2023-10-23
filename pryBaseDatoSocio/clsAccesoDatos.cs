@@ -56,5 +56,61 @@ namespace pryBaseDatoSocio
                 }
             }
         }
+
+
+        public void TraerDatos(DataGridView grilla)
+        {
+            comandoBD = new OleDbCommand();
+
+            comandoBD.Connection = conexionBD;
+            comandoBD.CommandType = System.Data.CommandType.TableDirect;
+            comandoBD.CommandText = "SOCIOS";
+
+            lectorBD = comandoBD.ExecuteReader();
+
+            grilla.Columns.Add("Nombre", "Nombre");
+            grilla.Columns.Add("Apellido", "Apellido");
+            grilla.Columns.Add("Edad", "Edad");
+
+            if (lectorBD.HasRows)
+            {
+                while (lectorBD.Read())
+                {
+                    datosTabla += "-" + lectorBD[0], lectorBD[2], lectorBD[3]; //El 0 muestra la primer columna(Los ID)
+                    grilla.Rows.Add();
+                }
+            }
+        }
+
+        public void BuscarPorCodigo(int codigoSocio)
+        {
+            comandoBD = new OleDbCommand();
+
+            comandoBD.Connection = conexionBD;
+            comandoBD.CommandType = System.Data.CommandType.TableDirect;
+            comandoBD.CommandText = "SOCIOS";
+
+            lectorBD = comandoBD.ExecuteReader();
+
+            bool seEncuentra = false;
+
+            if (lectorBD.HasRows)
+            {
+                while (lectorBD.Read())
+                {
+                    if (int.Parse(lectorBD[0].ToString()) == codigoSocio)
+                    {
+                        MessageBox.Show("Cliente existe", "Consulta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        seEncuentra = true;
+                        break;
+                    }
+                }
+
+                if (seEncuentra == false)
+                {
+                    MessageBox.Show("Cliente no existe", "Consulta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
     }
 }

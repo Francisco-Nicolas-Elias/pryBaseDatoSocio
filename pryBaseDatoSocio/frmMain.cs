@@ -33,6 +33,13 @@ namespace pryBaseDatoSocio
             objBaseDatos.TraerDatos();
 
             lblDatos.Text = objBaseDatos.datosTabla;
+
+            objBaseDatos.TraerDatos(dtvMostrarDatos);
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            objBaseDatos.BuscarPorCodigo(int.Parse(txtBuscar.Text));
         }
     }
 }
